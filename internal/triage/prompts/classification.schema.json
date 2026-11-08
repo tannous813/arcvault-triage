@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "rationale": {
+      "type": "string",
+      "description": "One sentence citing the evidence in the message that decides the category."
+    },
+    "category": {
+      "type": "string",
+      "enum": ["Bug Report", "Feature Request", "Billing Issue", "Technical Question", "Incident/Outage"]
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["Low", "Medium", "High"]
+    },
+    "confidence": {
+      "type": "number",
+      "description": "Certainty that the category is correct, from 0.0 to 1.0."
+    }
+  },
+  "required": ["rationale", "category", "priority", "confidence"],
+  "additionalProperties": false
+}

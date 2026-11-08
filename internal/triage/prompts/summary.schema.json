@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+    "summary": {
+      "type": "string",
+      "description": "2 to 3 sentences of plain text for the receiving team."
+    }
+  },
+  "required": ["summary"],
+  "additionalProperties": false
+}

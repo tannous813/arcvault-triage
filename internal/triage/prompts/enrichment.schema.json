@@ -1,0 +1,47 @@
+{
+  "type": "object",
+  "properties": {
+    "core_issue": {
+      "type": "string",
+      "description": "What the customer needs, in one sentence."
+    },
+    "identifiers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": { "type": "string", "enum": ["account", "invoice", "error_code", "other"] },
+          "value": { "type": "string", "description": "Copied exactly as written in the message." }
+        },
+        "required": ["type", "value"],
+        "additionalProperties": false
+      }
+    },
+    "amounts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "role": { "type": "string", "enum": ["charged", "expected", "other"] },
+          "value": { "type": "number" },
+          "currency": { "type": "string", "description": "ISO 4217 code, for example USD." }
+        },
+        "required": ["role", "value", "currency"],
+        "additionalProperties": false
+      }
+    },
+    "time_references": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "affected_scope": {
+      "type": "string",
+      "enum": ["single_user", "multiple_users", "organization_wide", "unknown"]
+    },
+    "product_area": { "type": "string" },
+    "urgency": { "type": "string", "enum": ["low", "medium", "high"] },
+    "urgency_reason": { "type": "string" }
+  },
+  "required": ["core_issue", "identifiers", "amounts", "time_references", "affected_scope", "product_area", "urgency", "urgency_reason"],
+  "additionalProperties": false
+}

@@ -1,0 +1,21 @@
+# Run 3: final run with all fixes. All five requests classified and routed as expected.
+
+PS C:\Users\User\Desktop\arcvault-triage\arcvault-triage> go run ./cmd/sendsamples
+✓ REQ-001  Bug Report | High | confidence 0.94 → Engineering  (1.924s)
+    The customer reports that they cannot log in to account arcvault.io/user/jsmith, receiving a 403 error since this morning after the update last Tuesday. This is a high‑urgency issue affecting a single user. The Engineering team should investigate the login failure and error code immediately.
+
+✓ REQ-002  Feature Request | Low | confidence 0.95 → Product  (1.438s)
+    The customer requested a bulk export feature for audit logs to streamline compliance work. The impact is low urgency and does not affect current operations. The receiving Product team should log the request as a feature suggestion for future roadmap consideration.
+
+✓ REQ-003  Billing Issue | Medium | confidence 0.95 → Billing  (13.822s)
+    The customer reports that invoice #8821 shows a charge of $1,240 instead of the contract rate of $980. This medium‑urgency billing discrepancy could affect their financial records. The Billing team should review the invoice details and correct any overcharge.
+
+✓ REQ-004  Technical Question | Low | confidence 0.95 → Support  (12.275s)
+    The customer asked how to set up SSO with Okta as they evaluate switching their auth provider. The impact is low urgency and no immediate service disruption. The Support team should provide documentation or guidance on configuring Okta SSO for ArcVault.
+
+✓ REQ-005  Incident/Outage | High | confidence 0.96 → Escalation  (11.635s)
+    escalation: incident: classified as Incident/Outage
+    escalation: broad_impact: affected scope is multiple_users
+    The customer reports that their dashboard stopped loading around 2pm EST and multiple users are affected. This is a high‑priority incident/outage with broad impact. The receiving team should immediately investigate the dashboard service outage, as it has been escalated for human review due to its severity and multiple‑user impact.
+
+done: 5 ok, 0 failed

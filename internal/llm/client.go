@@ -12,6 +12,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log/slog"
 	"math/rand"
 	"net/http"
 	"regexp"
@@ -41,6 +42,7 @@ type Client struct {
 	HTTP            *http.Client
 	MaxRetries      int
 	BaseDelay       time.Duration
+	Log             *slog.Logger // optional; logs each retry
 }
 
 func New(baseURL, apiKey, model string) *Client {
@@ -48,8 +50,8 @@ func New(baseURL, apiKey, model string) *Client {
 		BaseURL:    strings.TrimRight(baseURL, "/"),
 		APIKey:     apiKey,
 		Model:      model,
-		HTTP:       &http.Client{Timeout: 60 * time.Second},
-		MaxRetries: 6, // 1+2+4+8+16+30s: enough to ride out a per-minute rate-limit window
+		HTTP:       &http.Client{Timeout: 30 * time.Second}, // per attempt: a stuck call is abandoned and retried
+		MaxRetries: 6,                                       // 1+2+4+8+16+30s: enough to ride out a per-minute rate-limit window
 		BaseDelay:  time.Second,
 	}
 }
@@ -96,23 +98,25 @@ func (c *Client) CompleteJSON(ctx context.Context, req Request, out any) (Usage,
 		return Usage{}, fmt.Errorf("encoding request: %w", err)
 	}
 
-	var lastErr error
-	for attempt := 0; attempt <= c.MaxRetries; attempt++ {
-		if attempt > 0 {
-			if err := sleep(ctx, c.backoff(attempt, lastErr)); err != nil {
-				return Usage{}, err
-			}
-		}
+	for attempt := 1; ; attempt++ {
 		usage, err := c.send(ctx, payload, out)
 		if err == nil {
 			return usage, nil
 		}
-		lastErr = err
 		if !retryable(ctx, err) {
 			return usage, err
 		}
+		if attempt > c.MaxRetries {
+			return Usage{}, fmt.Errorf("giving up after %d attempts: %w", attempt, err)
+		}
+		wait := c.backoff(attempt, err)
+		if c.Log != nil {
+			c.Log.Warn("LLM call failed, retrying", "attempt", attempt, "wait", wait.Round(time.Millisecond), "err", truncate(err.Error(), 160))
+		}
+		if serr := sleep(ctx, wait); serr != nil {
+			return Usage{}, fmt.Errorf("%w while waiting to retry (last error: %v)", serr, err)
+		}
 	}
-	return Usage{}, fmt.Errorf("giving up after %d attempts: %w", c.MaxRetries+1, lastErr)
 }
 
 type chatResponse struct {

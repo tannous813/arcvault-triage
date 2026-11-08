@@ -17,6 +17,7 @@ func NewPipeline(cfg config.Config, log *slog.Logger) *triage.Pipeline {
 	rules.BillingThresholdUSD = cfg.BillingThresholdUSD
 
 	client := llm.New(cfg.LLMBaseURL, cfg.LLMAPIKey, cfg.LLMModel)
+	client.Log = log
 	if cfg.ReasoningEffort != "none" {
 		client.ReasoningEffort = cfg.ReasoningEffort
 	}

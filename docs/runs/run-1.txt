@@ -1,0 +1,25 @@
+# Run 1: first run against Groq, before the prompt and rate-limit fixes.
+# REQ-001 misclassified as Incident/Outage by 2 of 3 samples; self-consistency gave 0.67 and escalated it.
+# REQ-004 lost one sample to the free-tier tokens-per-minute limit; the pipeline continued with the other two.
+# (Groq organization ID redacted.)
+
+PS C:\Users\User\desktop\arcvault-triage\arcvault-triage> go run ./cmd/sendsamples
+✓ REQ-001  Incident/Outage | High | confidence 0.67 → Escalation  (2.453s)
+    escalation: low_confidence: 0.67 is below 0.70
+    escalation: incident: classified as Incident/Outage
+    The customer reports being unable to log in to account arcvault.io/user/jsmith, receiving a 403 error after the update last Tuesday. This is a high‑urgency incident affecting a single user’s access. The receiving team should immediately investigate the login failure, verify the recent update’s impact, and resolve the issue; it requires human review due to low confidence in automated triage and its classification as an Incident/Outage.
+
+✓ REQ-002  Feature Request | Low | confidence 0.95 → Product  (11.154s)
+    The customer requested a bulk export feature for audit logs, noting that their compliance-heavy organization would save hours each month. The impact is primarily operational efficiency with a low urgency rating. The receiving Product team should log this as a feature request and begin the standard evaluation process.
+
+✓ REQ-003  Billing Issue | Medium | confidence 0.95 → Billing  (22.787s)
+    The customer reports invoice #8821 shows a charge of $1,240, which exceeds the contract rate of $980/month. This billing discrepancy of $260 may affect their account and is marked as medium urgency. The Billing team should review the invoice details and contract terms to identify and correct any overcharge.
+
+✓ REQ-004  Technical Question | Low | confidence 0.95 → Support  (21.946s)
+    warning: classification sample 2 of 3 failed: giving up after 4 attempts: LLM API returned HTTP 429: {"error":{"message":"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_[redacted]` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7896, Requested 1174. Please try again in 8.025s. Need more tokens? Upgrade to Dev Tier today at https://cons…
+    The customer asked if SSO can be set up with Okta as they evaluate switching their authentication provider. This is a low‑urgency technical question with no immediate impact on services. The Support team should confirm the current Okta SSO capabilities and respond with the appropriate configuration guidance or reference to the integration documentation.
+
+✓ REQ-005  Incident/Outage | High | confidence 0.95 → Escalation  (11.517s)
+    escalation: incident: classified as Incident/Outage
+    escalation: broad_impact: affected scope is multiple_users
+    The customer reports that their dashboard stopped loading around 2pm EST and that multiple users are affected. This is a high‑urgency incident impacting multiple users. The receiving team should immediately investigate the dashboard service outage and engage the appropriate on‑call engineers, as the ticket was escalated for human review due to its incident classification and broad impact.

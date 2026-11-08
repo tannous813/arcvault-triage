@@ -56,6 +56,14 @@ go run ./cmd/sendsamples          # in a second terminal: send all five samples
 
 Results are written to `output/records.json`, with one file per queue in `output/queues/`. To watch records arrive downstream, set `WEBHOOK_URL` in `.env` to your Webhook.site URL; each record is POSTed there with `?queue=<name>`.
 
+## Documentation
+
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): design, routing and escalation logic, results, production-scale changes and phase 2
+- [`docs/PROMPTS.md`](docs/PROMPTS.md): the three prompts, why each is structured that way, tradeoffs, and what I'd change
+- [`AI_LOG.md`](AI_LOG.md): how AI tools were used and what had to be fixed
+- [`docs/runs/`](docs/runs/): raw output of the three test runs
+- [`output/records.json`](output/records.json): the structured output for the five sample requests
+
 ## Layout
 
 ```

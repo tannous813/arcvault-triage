@@ -1,7 +1,11 @@
 # AI Usage Log
 
-How AI tools were used while building this, and what they got wrong that had to be fixed. Add a row whenever an AI suggestion needed correcting; this becomes the "How I used AI" section of the submission.
+I built this with Claude as a pair programmer: planning the architecture, scaffolding the Go packages, drafting the prompts and docs, and diagnosing test runs. I made the design decisions, ran everything locally against the real Groq API, and reviewed every change. Below is what the AI got wrong or missed, and what was changed. The raw output of each test run is in `docs/runs/`.
 
-| Date | Tool | What I asked for | What it got wrong / what I changed | Why |
-|------|------|------------------|------------------------------------|-----|
-|      |      |                  |                                    |     |
+| Stage | What happened | What I changed | Why it matters |
+|---|---|---|---|
+| Planning | The first plan put the routing and escalation rules in n8n Code nodes. Those only run JavaScript or Python, and this is a Go role. | Dropped n8n. Go orchestrates the whole pipeline, and the rules live in their own tested package (`internal/routing`). | Business rules are typed, unit-tested and versioned in git instead of living inside workflow nodes. |
+| Build | The first version of the multi-user escalation rule would have escalated REQ-002, a feature request, because the customer mentions their whole organization. A table-driven test caught it. | Feature requests are excluded from that rule, and the enrichment prompt now defines `affected_scope` only for malfunctions. | An org-wide wish is not an outage. Escalating it would waste on-call time. |
+| Run 1 | REQ-001 (one user, 403 after a release) was classified as Incident/Outage by 2 of 3 samples. The prompt defined categories by impact but did not say how to choose between Bug Report and Incident/Outage. Self-consistency caught it: agreement 0.67, so it went to human review. | Added an explicit rule: decide by how many users the message says are affected, not by how severe it sounds. Run 2: Bug Report at 0.94. | Shows the safety net working, and that self-reported confidence alone (about 0.95 for almost everything) would likely not have caught it. |
+| Run 1 | One REQ-004 sample hit Groq's free-tier limit of 8,000 tokens per minute. The retry logic gave up after about 7 seconds while Groq asked for 8. | Up to 6 retries with longer backoff. The client now honours `Retry-After` and Groq's "try again in Xs" message. Reasoning effort set to low to cut tokens, and the sender waits 10 seconds between messages. | Rate limits are normal at scale, and the client should wait as long as the provider asks. |
+| Run 2 | Every REQ-005 call was still waiting on Groq when the 2-minute request budget ran out. The record was not lost: it went to human review with each failure listed. | Added a 30-second timeout per attempt, so one stuck call cannot use up the whole budget, plus a log line for every retry. Re-sent REQ-005, which replaced the failed record with a clean one. | Failures should be visible and recoverable, never silent. |

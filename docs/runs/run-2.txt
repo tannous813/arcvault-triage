@@ -1,0 +1,27 @@
+# Run 2: after the classification prompt fix and the first rate-limit changes.
+# REQ-001 is now a Bug Report at 0.94. REQ-005 failed: every LLM call was still waiting on Groq when the
+# 2-minute request budget ran out. Nothing was dropped; the record went to human review with each failure listed.
+# This led to the 30-second per-attempt timeout and retry logging.
+
+✓ REQ-001  Bug Report | High | confidence 0.94 → Engineering  (1.46s)
+    The customer reports being unable to log in to account arcvault.io/user/jsmith, receiving a 403 error since this morning after the update last Tuesday. This is a high‑urgency issue affecting a single user. The Engineering team should investigate the login failure and error code immediately.
+
+✓ REQ-002  Feature Request | Low | confidence 0.95 → Product  (1.443s)
+    The customer requested a bulk export feature for audit logs to streamline compliance work. The impact is low urgency as it is a feature request. The receiving Product team should log the request for future roadmap consideration.
+
+✓ REQ-003  Billing Issue | Medium | confidence 0.95 → Billing  (7.934s)
+    The customer reports that invoice #8821 shows a charge of $1,240 instead of the contracted $980/month, indicating a $260 discrepancy. This is a medium‑urgency billing issue that may affect their account balance. The Billing team should review the invoice details and contract terms to determine the cause of the overcharge and propose a correction.
+
+✓ REQ-004  Technical Question | Low | confidence 0.95 → Support  (10.96s)
+    The customer asked how to set up SSO with Okta as they evaluate switching their auth provider. The impact is low and the request is not urgent. The Support team should provide the relevant documentation or steps for configuring Okta SSO.
+
+✓ REQ-005  Unclassified | High | confidence 0.00 → Escalation  (2m0.015s)
+    escalation: processing_error: an LLM step failed, so the triage result is incomplete
+    warning: classification sample 1 of 3 failed: Post "https://api.groq.com/openai/v1/chat/completions": context deadline exceeded
+    warning: classification sample 2 of 3 failed: Post "https://api.groq.com/openai/v1/chat/completions": context deadline exceeded
+    warning: classification sample 3 of 3 failed: Post "https://api.groq.com/openai/v1/chat/completions": context deadline exceeded
+    warning: enrichment failed: Post "https://api.groq.com/openai/v1/chat/completions": context deadline exceeded
+    warning: summary failed, used a template instead: Post "https://api.groq.com/openai/v1/chat/completions": context deadline exceeded
+    Unclassified (High priority), routed to Escalation. Needs human review: processing_error: an LLM step failed, so the triage result is incomplete.
+
+done: 5 ok, 0 failed

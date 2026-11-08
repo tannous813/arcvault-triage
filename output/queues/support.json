@@ -1,0 +1,50 @@
+[
+  {
+    "id": "REQ-004",
+    "source": "email",
+    "received_at": "2026-11-06T18:01:08Z",
+    "processed_at": "2026-11-06T18:01:21Z",
+    "message": "I'm not sure if this is the right place to ask, but is there a way to set up SSO with Okta? We're evaluating switching our auth provider.",
+    "classification": {
+      "category": "Technical Question",
+      "priority": "Low",
+      "confidence": 0.95,
+      "rationale": "The customer asks how to set up SSO with Okta, which is a configuration question, not reporting a problem.",
+      "confidence_detail": {
+        "method": "self_consistency",
+        "samples": 3,
+        "agreement": 1,
+        "model_reported": 0.95,
+        "votes": {
+          "Technical Question": 3
+        }
+      }
+    },
+    "enrichment": {
+      "core_issue": "Customer wants to know how to set up SSO with Okta.",
+      "identifiers": [],
+      "amounts": [],
+      "time_references": [],
+      "affected_scope": "unknown",
+      "product_area": "sso",
+      "urgency": "low",
+      "urgency_reason": "general inquiry"
+    },
+    "routing": {
+      "standard_queue": "Support",
+      "destination_queue": "Support",
+      "escalated": false,
+      "escalation_reasons": [],
+      "billing_discrepancy_usd": null
+    },
+    "summary": "The customer asked how to set up SSO with Okta as they evaluate switching their auth provider. The impact is low urgency and no immediate service disruption. The Support team should provide documentation or guidance on configuring Okta SSO for ArcVault.",
+    "warnings": [],
+    "processing": {
+      "model": "openai/gpt-oss-120b",
+      "duration_ms": 12248,
+      "llm_calls": 5,
+      "prompt_tokens": 3671,
+      "completion_tokens": 495
+    }
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "REQ-001",
+    "source": "email",
+    "received_at": "2026-11-06T18:00:21Z",
+    "processed_at": "2026-11-06T18:00:23Z",
+    "message": "Hi, I tried logging in this morning and keep getting a 403 error. My account is arcvault.io/user/jsmith. This started after your update last Tuesday.",
+    "classification": {
+      "category": "Bug Report",
+      "priority": "High",
+      "confidence": 0.94,
+      "rationale": "The user reports a 403 error when trying to log in, indicating a product malfunction affecting their account only.",
+      "confidence_detail": {
+        "method": "self_consistency",
+        "samples": 3,
+        "agreement": 1,
+        "model_reported": 0.94,
+        "votes": {
+          "Bug Report": 3
+        }
+      }
+    },
+    "enrichment": {
+      "core_issue": "User cannot log in and receives a 403 error.",
+      "identifiers": [
+        {
+          "type": "account",
+          "value": "arcvault.io/user/jsmith"
+        },
+        {
+          "type": "error_code",
+          "value": "403"
+        }
+      ],
+      "amounts": [],
+      "time_references": [
+        "this morning",
+        "last Tuesday"
+      ],
+      "affected_scope": "single_user",
+      "product_area": "login",
+      "urgency": "high",
+      "urgency_reason": "blocked login"
+    },
+    "routing": {
+      "standard_queue": "Engineering",
+      "destination_queue": "Engineering",
+      "escalated": false,
+      "escalation_reasons": [],
+      "billing_discrepancy_usd": null
+    },
+    "summary": "The customer reports that they cannot log in to account arcvault.io/user/jsmith, receiving a 403 error since this morning after the update last Tuesday. This is a high‑urgency issue affecting a single user. The Engineering team should investigate the login failure and error code immediately.",
+    "warnings": [],
+    "processing": {
+      "model": "openai/gpt-oss-120b",
+      "duration_ms": 1811,
+      "llm_calls": 5,
+      "prompt_tokens": 3735,
+      "completion_tokens": 592
+    }
+  }
+]

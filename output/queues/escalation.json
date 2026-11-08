@@ -1,0 +1,55 @@
+[
+  {
+    "id": "REQ-005",
+    "source": "web_form",
+    "received_at": "2026-11-06T18:01:31Z",
+    "processed_at": "2026-11-06T18:01:42Z",
+    "message": "Your dashboard stopped loading for us around 2pm EST. Checked our end — it's definitely on yours. Multiple users affected.",
+    "classification": {
+      "category": "Incident/Outage",
+      "priority": "High",
+      "confidence": 0.96,
+      "rationale": "The message reports that the dashboard stopped loading for multiple users, indicating a service-wide issue.",
+      "confidence_detail": {
+        "method": "self_consistency",
+        "samples": 3,
+        "agreement": 1,
+        "model_reported": 0.96,
+        "votes": {
+          "Incident/Outage": 3
+        }
+      }
+    },
+    "enrichment": {
+      "core_issue": "The dashboard is not loading.",
+      "identifiers": [],
+      "amounts": [],
+      "time_references": [
+        "around 2pm EST"
+      ],
+      "affected_scope": "multiple_users",
+      "product_area": "dashboard",
+      "urgency": "high",
+      "urgency_reason": "dashboard unavailable for multiple users"
+    },
+    "routing": {
+      "standard_queue": "Engineering",
+      "destination_queue": "Escalation",
+      "escalated": true,
+      "escalation_reasons": [
+        "incident: classified as Incident/Outage",
+        "broad_impact: affected scope is multiple_users"
+      ],
+      "billing_discrepancy_usd": null
+    },
+    "summary": "The customer reports that their dashboard stopped loading around 2pm EST and multiple users are affected. This is a high‑priority incident/outage with broad impact. The receiving team should immediately investigate the dashboard service outage, as it has been escalated for human review due to its severity and multiple‑user impact.",
+    "warnings": [],
+    "processing": {
+      "model": "openai/gpt-oss-120b",
+      "duration_ms": 11606,
+      "llm_calls": 5,
+      "prompt_tokens": 3670,
+      "completion_tokens": 506
+    }
+  }
+]

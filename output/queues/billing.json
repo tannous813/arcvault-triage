@@ -1,0 +1,66 @@
+[
+  {
+    "id": "REQ-003",
+    "source": "support_portal",
+    "received_at": "2026-11-06T18:00:45Z",
+    "processed_at": "2026-11-06T18:00:58Z",
+    "message": "Invoice #8821 shows a charge of $1,240 but our contract rate is $980/month. Can someone look into this?",
+    "classification": {
+      "category": "Billing Issue",
+      "priority": "Medium",
+      "confidence": 0.95,
+      "rationale": "The message references an invoice charge discrepancy and asks for someone to look into it.",
+      "confidence_detail": {
+        "method": "self_consistency",
+        "samples": 3,
+        "agreement": 1,
+        "model_reported": 0.95,
+        "votes": {
+          "Billing Issue": 3
+        }
+      }
+    },
+    "enrichment": {
+      "core_issue": "Customer wants a review of an invoice discrepancy where they were charged more than the contract rate.",
+      "identifiers": [
+        {
+          "type": "invoice",
+          "value": "#8821"
+        }
+      ],
+      "amounts": [
+        {
+          "role": "charged",
+          "value": 1240,
+          "currency": "USD"
+        },
+        {
+          "role": "expected",
+          "value": 980,
+          "currency": "USD"
+        }
+      ],
+      "time_references": [],
+      "affected_scope": "unknown",
+      "product_area": "invoicing",
+      "urgency": "medium",
+      "urgency_reason": "billing discrepancy reported"
+    },
+    "routing": {
+      "standard_queue": "Billing",
+      "destination_queue": "Billing",
+      "escalated": false,
+      "escalation_reasons": [],
+      "billing_discrepancy_usd": 260
+    },
+    "summary": "The customer reports that invoice #8821 shows a charge of $1,240 instead of the contract rate of $980. This medium‑urgency billing discrepancy could affect their financial records. The Billing team should review the invoice details and correct any overcharge.",
+    "warnings": [],
+    "processing": {
+      "model": "openai/gpt-oss-120b",
+      "duration_ms": 13785,
+      "llm_calls": 5,
+      "prompt_tokens": 3732,
+      "completion_tokens": 559
+    }
+  }
+]

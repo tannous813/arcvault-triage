@@ -1,0 +1,50 @@
+[
+  {
+    "id": "REQ-002",
+    "source": "web_form",
+    "received_at": "2026-11-06T18:00:33Z",
+    "processed_at": "2026-11-06T18:00:34Z",
+    "message": "We'd love to see a bulk export feature for our audit logs. We're a compliance-heavy org and this would save us hours every month.",
+    "classification": {
+      "category": "Feature Request",
+      "priority": "Low",
+      "confidence": 0.95,
+      "rationale": "The customer asks for a bulk export feature for audit logs, which is a request for new functionality.",
+      "confidence_detail": {
+        "method": "self_consistency",
+        "samples": 3,
+        "agreement": 1,
+        "model_reported": 0.95,
+        "votes": {
+          "Feature Request": 3
+        }
+      }
+    },
+    "enrichment": {
+      "core_issue": "Request to add a bulk export feature for audit logs.",
+      "identifiers": [],
+      "amounts": [],
+      "time_references": [],
+      "affected_scope": "unknown",
+      "product_area": "audit logs",
+      "urgency": "low",
+      "urgency_reason": "feature request"
+    },
+    "routing": {
+      "standard_queue": "Product",
+      "destination_queue": "Product",
+      "escalated": false,
+      "escalation_reasons": [],
+      "billing_discrepancy_usd": null
+    },
+    "summary": "The customer requested a bulk export feature for audit logs to streamline compliance work. The impact is low urgency and does not affect current operations. The receiving Product team should log the request as a feature suggestion for future roadmap consideration.",
+    "warnings": [],
+    "processing": {
+      "model": "openai/gpt-oss-120b",
+      "duration_ms": 1411,
+      "llm_calls": 5,
+      "prompt_tokens": 3649,
+      "completion_tokens": 454
+    }
+  }
+]

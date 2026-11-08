@@ -1,0 +1,275 @@
+[
+  {
+    "id": "REQ-001",
+    "source": "email",
+    "received_at": "2026-11-06T18:00:21Z",
+    "processed_at": "2026-11-06T18:00:23Z",
+    "message": "Hi, I tried logging in this morning and keep getting a 403 error. My account is arcvault.io/user/jsmith. This started after your update last Tuesday.",
+    "classification": {
+      "category": "Bug Report",
+      "priority": "High",
+      "confidence": 0.94,
+      "rationale": "The user reports a 403 error when trying to log in, indicating a product malfunction affecting their account only.",
+      "confidence_detail": {
+        "method": "self_consistency",
+        "samples": 3,
+        "agreement": 1,
+        "model_reported": 0.94,
+        "votes": {
+          "Bug Report": 3
+        }
+      }
+    },
+    "enrichment": {
+      "core_issue": "User cannot log in and receives a 403 error.",
+      "identifiers": [
+        {
+          "type": "account",
+          "value": "arcvault.io/user/jsmith"
+        },
+        {
+          "type": "error_code",
+          "value": "403"
+        }
+      ],
+      "amounts": [],
+      "time_references": [
+        "this morning",
+        "last Tuesday"
+      ],
+      "affected_scope": "single_user",
+      "product_area": "login",
+      "urgency": "high",
+      "urgency_reason": "blocked login"
+    },
+    "routing": {
+      "standard_queue": "Engineering",
+      "destination_queue": "Engineering",
+      "escalated": false,
+      "escalation_reasons": [],
+      "billing_discrepancy_usd": null
+    },
+    "summary": "The customer reports that they cannot log in to account arcvault.io/user/jsmith, receiving a 403 error since this morning after the update last Tuesday. This is a high‑urgency issue affecting a single user. The Engineering team should investigate the login failure and error code immediately.",
+    "warnings": [],
+    "processing": {
+      "model": "openai/gpt-oss-120b",
+      "duration_ms": 1811,
+      "llm_calls": 5,
+      "prompt_tokens": 3735,
+      "completion_tokens": 592
+    }
+  },
+  {
+    "id": "REQ-002",
+    "source": "web_form",
+    "received_at": "2026-11-06T18:00:33Z",
+    "processed_at": "2026-11-06T18:00:34Z",
+    "message": "We'd love to see a bulk export feature for our audit logs. We're a compliance-heavy org and this would save us hours every month.",
+    "classification": {
+      "category": "Feature Request",
+      "priority": "Low",
+      "confidence": 0.95,
+      "rationale": "The customer asks for a bulk export feature for audit logs, which is a request for new functionality.",
+      "confidence_detail": {
+        "method": "self_consistency",
+        "samples": 3,
+        "agreement": 1,
+        "model_reported": 0.95,
+        "votes": {
+          "Feature Request": 3
+        }
+      }
+    },
+    "enrichment": {
+      "core_issue": "Request to add a bulk export feature for audit logs.",
+      "identifiers": [],
+      "amounts": [],
+      "time_references": [],
+      "affected_scope": "unknown",
+      "product_area": "audit logs",
+      "urgency": "low",
+      "urgency_reason": "feature request"
+    },
+    "routing": {
+      "standard_queue": "Product",
+      "destination_queue": "Product",
+      "escalated": false,
+      "escalation_reasons": [],
+      "billing_discrepancy_usd": null
+    },
+    "summary": "The customer requested a bulk export feature for audit logs to streamline compliance work. The impact is low urgency and does not affect current operations. The receiving Product team should log the request as a feature suggestion for future roadmap consideration.",
+    "warnings": [],
+    "processing": {
+      "model": "openai/gpt-oss-120b",
+      "duration_ms": 1411,
+      "llm_calls": 5,
+      "prompt_tokens": 3649,
+      "completion_tokens": 454
+    }
+  },
+  {
+    "id": "REQ-003",
+    "source": "support_portal",
+    "received_at": "2026-11-06T18:00:45Z",
+    "processed_at": "2026-11-06T18:00:58Z",
+    "message": "Invoice #8821 shows a charge of $1,240 but our contract rate is $980/month. Can someone look into this?",
+    "classification": {
+      "category": "Billing Issue",
+      "priority": "Medium",
+      "confidence": 0.95,
+      "rationale": "The message references an invoice charge discrepancy and asks for someone to look into it.",
+      "confidence_detail": {
+        "method": "self_consistency",
+        "samples": 3,
+        "agreement": 1,
+        "model_reported": 0.95,
+        "votes": {
+          "Billing Issue": 3
+        }
+      }
+    },
+    "enrichment": {
+      "core_issue": "Customer wants a review of an invoice discrepancy where they were charged more than the contract rate.",
+      "identifiers": [
+        {
+          "type": "invoice",
+          "value": "#8821"
+        }
+      ],
+      "amounts": [
+        {
+          "role": "charged",
+          "value": 1240,
+          "currency": "USD"
+        },
+        {
+          "role": "expected",
+          "value": 980,
+          "currency": "USD"
+        }
+      ],
+      "time_references": [],
+      "affected_scope": "unknown",
+      "product_area": "invoicing",
+      "urgency": "medium",
+      "urgency_reason": "billing discrepancy reported"
+    },
+    "routing": {
+      "standard_queue": "Billing",
+      "destination_queue": "Billing",
+      "escalated": false,
+      "escalation_reasons": [],
+      "billing_discrepancy_usd": 260
+    },
+    "summary": "The customer reports that invoice #8821 shows a charge of $1,240 instead of the contract rate of $980. This medium‑urgency billing discrepancy could affect their financial records. The Billing team should review the invoice details and correct any overcharge.",
+    "warnings": [],
+    "processing": {
+      "model": "openai/gpt-oss-120b",
+      "duration_ms": 13785,
+      "llm_calls": 5,
+      "prompt_tokens": 3732,
+      "completion_tokens": 559
+    }
+  },
+  {
+    "id": "REQ-004",
+    "source": "email",
+    "received_at": "2026-11-06T18:01:08Z",
+    "processed_at": "2026-11-06T18:01:21Z",
+    "message": "I'm not sure if this is the right place to ask, but is there a way to set up SSO with Okta? We're evaluating switching our auth provider.",
+    "classification": {
+      "category": "Technical Question",
+      "priority": "Low",
+      "confidence": 0.95,
+      "rationale": "The customer asks how to set up SSO with Okta, which is a configuration question, not reporting a problem.",
+      "confidence_detail": {
+        "method": "self_consistency",
+        "samples": 3,
+        "agreement": 1,
+        "model_reported": 0.95,
+        "votes": {
+          "Technical Question": 3
+        }
+      }
+    },
+    "enrichment": {
+      "core_issue": "Customer wants to know how to set up SSO with Okta.",
+      "identifiers": [],
+      "amounts": [],
+      "time_references": [],
+      "affected_scope": "unknown",
+      "product_area": "sso",
+      "urgency": "low",
+      "urgency_reason": "general inquiry"
+    },
+    "routing": {
+      "standard_queue": "Support",
+      "destination_queue": "Support",
+      "escalated": false,
+      "escalation_reasons": [],
+      "billing_discrepancy_usd": null
+    },
+    "summary": "The customer asked how to set up SSO with Okta as they evaluate switching their auth provider. The impact is low urgency and no immediate service disruption. The Support team should provide documentation or guidance on configuring Okta SSO for ArcVault.",
+    "warnings": [],
+    "processing": {
+      "model": "openai/gpt-oss-120b",
+      "duration_ms": 12248,
+      "llm_calls": 5,
+      "prompt_tokens": 3671,
+      "completion_tokens": 495
+    }
+  },
+  {
+    "id": "REQ-005",
+    "source": "web_form",
+    "received_at": "2026-11-06T18:01:31Z",
+    "processed_at": "2026-11-06T18:01:42Z",
+    "message": "Your dashboard stopped loading for us around 2pm EST. Checked our end — it's definitely on yours. Multiple users affected.",
+    "classification": {
+      "category": "Incident/Outage",
+      "priority": "High",
+      "confidence": 0.96,
+      "rationale": "The message reports that the dashboard stopped loading for multiple users, indicating a service-wide issue.",
+      "confidence_detail": {
+        "method": "self_consistency",
+        "samples": 3,
+        "agreement": 1,
+        "model_reported": 0.96,
+        "votes": {
+          "Incident/Outage": 3
+        }
+      }
+    },
+    "enrichment": {
+      "core_issue": "The dashboard is not loading.",
+      "identifiers": [],
+      "amounts": [],
+      "time_references": [
+        "around 2pm EST"
+      ],
+      "affected_scope": "multiple_users",
+      "product_area": "dashboard",
+      "urgency": "high",
+      "urgency_reason": "dashboard unavailable for multiple users"
+    },
+    "routing": {
+      "standard_queue": "Engineering",
+      "destination_queue": "Escalation",
+      "escalated": true,
+      "escalation_reasons": [
+        "incident: classified as Incident/Outage",
+        "broad_impact: affected scope is multiple_users"
+      ],
+      "billing_discrepancy_usd": null
+    },
+    "summary": "The customer reports that their dashboard stopped loading around 2pm EST and multiple users are affected. This is a high‑priority incident/outage with broad impact. The receiving team should immediately investigate the dashboard service outage, as it has been escalated for human review due to its severity and multiple‑user impact.",
+    "warnings": [],
+    "processing": {
+      "model": "openai/gpt-oss-120b",
+      "duration_ms": 11606,
+      "llm_calls": 5,
+      "prompt_tokens": 3670,
+      "completion_tokens": 506
+    }
+  }
+]
